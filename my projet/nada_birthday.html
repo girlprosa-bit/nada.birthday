@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عيد ميلاد ندى 🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #ff6b9d;
+    --rose-light: #ffb3d1;
+    --gold: #ffd700;
+    --gold-light: #fff3a3;
+    --purple: #c084fc;
+    --bg: #0a0010;
+    --white: #fff8f8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Tajawal', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  @media (max-width: 768px) {
+    body {
+      cursor: auto;
+    }
+  }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed;
+    width: 18px; height: 18px;
+    background: var(--rose);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, background 0.3s;
+    box-shadow: 0 0 15px var(--rose);
+  }
+
+  /* Stars background */
+  .stars {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .star {
+    position: absolute;
+    border-radius: 50%;
+    background: white;
+    animation: twinkle var(--d) infinite ease-in-out;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.4); }
+  }
+
+  /* Floating hearts */
+  .hearts-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .heart {
+    position: absolute;
+    bottom: -50px;
+    font-size: 1.4rem;
+    animation: floatUp linear infinite;
+    opacity: 0;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(0) rotate(-15deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.6; }
+    100% { transform: translateY(-110vh) rotate(15deg); opacity: 0; }
+  }
+
+  /* Main layout */
+  .page {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 2rem;
+    animation: fadeDown 1.2s ease;
+  }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .emoji-top {
+    font-size: 3rem;
+    animation: bounce 1.5s infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2.8rem, 8vw, 5.5rem);
+    background: linear-gradient(135deg, var(--rose), var(--gold), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    text-shadow: none;
+    filter: drop-shadow(0 0 30px rgba(255,107,157,0.5));
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    color: var(--rose-light);
+    margin-top: 0.5rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+  }
+
+  /* Countdown */
+  .countdown-section {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,107,157,0.3);
+    border-radius: 24px;
+    padding: 1.8rem 2.5rem;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+    animation: fadeIn 1.5s ease 0.3s both;
+    max-width: 700px;
+    width: 100%;
+    text-align: center;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .countdown-title {
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    color: var(--rose-light);
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+
+  .countdown-grid {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .countdown-item {
+    text-align: center;
+    min-width: 80px;
+  }
+
+  .countdown-number {
+    font-size: 2.8rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--rose), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    display: block;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .countdown-label {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+    display: block;
+  }
+
+  .countdown-separator {
+    font-size: 2rem;
+    color: var(--rose);
+    opacity: 0.5;
+    align-self: center;
+    margin-top: -10px;
+  }
+
+  .age-display {
+    margin-top: 1.2rem;
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .age-display span {
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  /* Birthday message - gift box */
+  .gift-section {
+    animation: fadeIn 1.5s ease 0.6s both;
+    margin-bottom: 2rem;
+    perspective: 1000px;
+  }
+
+  .gift-box {
+    position: relative;
+    cursor: pointer;
+    width: min(200px, 80vw);
+    height: min(200px, 80vw);
+    margin: 0 auto 1rem;
+    transform-style: preserve-3d;
+    transition: transform 0.3s;
+  }
+  .gift-box:hover { transform: scale(1.05) rotate(-2deg); }
+
+  .gift-body {
+    width: calc(min(200px, 80vw) - 20px);
+    height: calc(min(200px, 80vw) - 50px);
+    background: linear-gradient(135deg, #e91e8c, #c2185b);
+    border-radius: 12px;
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    box-shadow: 0 20px 60px rgba(233,30,140,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+    overflow: hidden;
+  }
+  .gift-body::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 20px; height: 100%;
+    background: rgba(255,255,255,0.2);
+  }
+  .gift-body::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 0; right: 0; transform: translateY(-50%);
+    height: 20px;
+    background: rgba(255,255,255,0.2);
+  }
+
+  .gift-lid {
+    width: calc(min(200px, 80vw) - 10px);
+    height: 50px;
+    background: linear-gradient(135deg, #f06292, #e91e8c);
+    border-radius: 12px 12px 0 0;
+    position: absolute;
+    top: 0;
+    left: 5px;
+    box-shadow: 0 -5px 20px rgba(233,30,140,0.3);
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-origin: bottom center;
+  }
+
+  .gift-bow {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3rem;
+    filter: drop-shadow(0 5px 15px rgba(255,215,0,0.5));
+    animation: bowPulse 2s infinite ease-in-out;
+    z-index: 2;
+  }
+  @keyframes bowPulse {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.1) rotate(5deg); }
+  }
+
+  .gift-hint {
+    text-align: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  /* Message overlay */
+  .message-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,0,16,0.85);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(8px);
+    padding: 1rem;
+  }
+  .message-overlay.active {
+    display: flex;
+    animation: overlayIn 0.4s ease;
+  }
+  @keyframes overlayIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .message-card {
+    background: linear-gradient(135deg, #1a0030, #2d0050);
+    border: 2px solid rgba(255,107,157,0.4);
+    border-radius: 28px;
+    padding: 2.5rem;
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 30px 100px rgba(255,107,157,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+    animation: cardPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both;
+    position: relative;
+    overflow: hidden;
+  }
+  @keyframes cardPop {
+    from { opacity: 0; transform: scale(0.7) rotate(-5deg); }
+    to { opacity: 1; transform: scale(1) rotate(0deg); }
+  }
+
+  .message-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(255,107,157,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .confetti-strip {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    display: block;
+    letter-spacing: 4px;
+  }
+
+  .message-name {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    filter: drop-shadow(0 0 20px rgba(255,215,0,0.5));
+  }
+
+  .message-age-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--rose), var(--purple));
+    border-radius: 30px;
+    padding: 0.3rem 1.2rem;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 5px 20px rgba(255,107,157,0.4);
+  }
+
+  .message-text {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: rgba(255,255,255,0.85);
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+
+  .message-text strong {
+    color: var(--rose-light);
+    font-weight: 700;
+  }
+
+  .message-signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.6rem;
+    color: var(--rose);
+    margin-bottom: 1.5rem;
+  }
+
+  .close-btn {
+    background: linear-gradient(135deg, var(--rose), var(--purple));
+    border: none;
+    color: white;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 8px 25px rgba(255,107,157,0.4);
+  }
+  .close-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 35px rgba(255,107,157,0.6);
+  }
+
+  /* Stats section */
+  .stats-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    max-width: 700px;
+    width: 100%;
+    margin-bottom: 2rem;
+    animation: fadeIn 1.5s ease 0.9s both;
+  }
+
+  .stat-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,107,157,0.2);
+    border-radius: 18px;
+    padding: 1.2rem;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .stat-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255,107,157,0.6);
+  }
+
+  .stat-icon { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+  .stat-value {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+  }
+  .stat-desc {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+    display: block;
+  }
+
+  /* Cake */
+  .cake-section {
+    font-size: 5rem;
+    text-align: center;
+    animation: fadeIn 1.5s ease 1.2s both;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 30px rgba(255,107,157,0.4));
+    cursor: pointer;
+  }
+  .cake-section:hover {
+    animation: shake 0.4s ease, fadeIn 0s;
+  }
+  @keyframes shake {
+    0%, 100% { transform: rotate(0); }
+    25% { transform: rotate(-10deg) scale(1.1); }
+    75% { transform: rotate(10deg) scale(1.1); }
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    color: rgba(255,255,255,0.2);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    animation: fadeIn 1.5s ease 1.5s both;
+    margin-top: 1rem;
+  }
+
+  /* Confetti pieces */
+  .confetti-piece {
+    position: fixed;
+    pointer-events: none;
+    z-index: 200;
+    border-radius: 3px;
+    animation: confettiFall linear forwards;
+  }
+  @keyframes confettiFall {
+    0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* Balloons */
+  .balloon {
+    position: fixed;
+    pointer-events: none;
+    z-index: 150;
+    font-size: 2rem;
+    animation: balloonFloat linear forwards;
+  }
+  @keyframes balloonFloat {
+    0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+  }
+
+  /* Birthday mode */
+  .birthday-mode .header h1 {
+    animation: rainbowText 3s linear infinite;
+  }
+  @keyframes rainbowText {
+    0% { filter: drop-shadow(0 0 30px rgba(255,107,157,0.5)) hue-rotate(0deg); }
+    100% { filter: drop-shadow(0 0 30px rgba(255,107,157,0.5)) hue-rotate(360deg); }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<div class="stars" id="stars"></div>
+<div class="hearts-container" id="hearts"></div>
+
+<!-- Message Overlay -->
+<div class="message-overlay" id="messageOverlay">
+  <div class="message-card">
+    <span class="confetti-strip">🎉 🎂 🌸 🎁 ✨ 💝 🎊</span>
+    <div class="message-name">ندى</div>
+    <div class="message-age-badge">🎂 عيد ميلادك العشرون 🎂</div>
+    <p class="message-text">
+      في هذا اليوم المميّز،<br>
+      تُشرق شمعة جديدة في حياتك الجميلة...<br><br>
+      <strong>عشرون عاماً</strong> من الضحكات، والأحلام، والخطوات الجريئة نحو المستقبل.
+      في هذا اليوم المبارك رزقنا الله بفتاة نورت الدنيا وانارتها بجمالها وروعة بصيرتها.<br><br>
+     
+   في هذا اليوم نحتفل بعيدك العشرين ياندوش وندعولك ربي فيه انو يطول في عمرك ويحققلك احلامك 
+   ويعطيك كامل ماتتمناي ومايخلي حاجة في خاطرك .
+     قصةٌ لا تزال تُكتب بيديكِ، بعزمكِ، وبتلك الابتسامة التي تُنير كل ما حولها.<br><br>
+      <strong>عيد ميلادك مبارك يا ندوشتييي</strong> 🌸<br>
+      كل عام وأنتِ تزدادين نوراً ونجاحاً وسعادة لا تنتهي مع التوفيق في حياتك وان يحفظك ربي 
+      ويخليك مع والديك ويفرحك بيهم💫
+    </p>
+    <div class="message-signature">✍️ ان شاء الله يعجبك كادو تاعي💕</div>
+    <button class="close-btn" onclick="closeMessage()">شكراً💝</button>
+  </div>
+</div>
+
+<!-- Audio elements -->
+<audio id="partyHorn" preload="auto">
+  <source src="https://freesound.org/data/previews/316/316847_5123451-lq.mp3" type="audio/mpeg">
+</audio>
+<audio id="birthdaySong" preload="auto">
+  <source src="https://www.soundjay.com/misc/sounds/happy-birthday-song-01.wav" type="audio/wav">
+</audio>
+
+<div class="page">
+  <div class="header">
+    <div class="emoji-top">🌸</div>
+    <h1>عيد ميلاد سعيد يا ندوشتيييييي</h1>
+    <p class="subtitle">✨ يوم خاص لشخصة مميّزة ✨</p>
+  </div>
+
+  <!-- Countdown -->
+  <div class="countdown-section" id="countdownSection">
+    <div class="countdown-title" id="countdownTitle">⏳ الوقت المتبقي على عيد ميلادك</div>
+    <div class="countdown-grid" id="countdownGrid">
+      <div class="countdown-item">
+        <span class="countdown-number" id="cd-days">--</span>
+        <span class="countdown-label">يوم</span>
+      </div>
+      <div class="countdown-separator">:</div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="cd-hours">--</span>
+        <span class="countdown-label">ساعة</span>
+      </div>
+      <div class="countdown-separator">:</div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="cd-minutes">--</span>
+        <span class="countdown-label">دقيقة</span>
+      </div>
+      <div class="countdown-separator">:</div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="cd-seconds">--</span>
+        <span class="countdown-label">ثانية</span>
+      </div>
+    </div>
+    <div class="age-display" id="ageDisplay"></div>
+  </div>
+
+  <!-- Gift box -->
+  <div class="gift-section">
+    <div class="gift-box" id="giftBox" onclick="openGift()" ontouchstart="openGift()">
+      <div class="gift-bow">🎀</div>
+      <div class="gift-lid" id="giftLid"></div>
+      <div class="gift-body"></div>
+    </div>
+    <p class="gift-hint" id="giftHint">🎁 انقري على الهدية لفتح رسالة خاصة</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-section">
+    <div class="stat-card">
+      <span class="stat-icon">🌍</span>
+      <span class="stat-value" id="stat-years">0</span>
+      <span class="stat-desc">سنة من العمر</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon">📅</span>
+      <span class="stat-value" id="stat-days">0</span>
+      <span class="stat-desc">يوم عشتِه</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon">⏰</span>
+      <span class="stat-value" id="stat-hours">0</span>
+      <span class="stat-desc">ساعة من الحياة</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon">💓</span>
+      <span class="stat-value" id="stat-heartbeats">0</span>
+      <span class="stat-desc">نبضة قلب</span>
+    </div>
+  </div>
+
+  <!-- Cake -->
+  <div class="cake-section" id="cakeEmoji" onclick="celebrate()" ontouchstart="celebrate()">🎂</div>
+
+  <div class="footer">
+    Made with 💕 for Nada • 3 May 2006 → 3 May 2026
+  </div>
+</div>
+
+<script>
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  if (window.innerWidth > 768) {
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+  } else {
+    cursor.style.display = 'none';
+  }
+
+  // Stars
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 120; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 3 + 1;
+    s.style.cssText = `
+      width: ${size}px; height: ${size}px;
+      left: ${Math.random() * 100}%;
+      top: ${Math.random() * 100}%;
+      --d: ${Math.random() * 3 + 2}s;
+      animation-delay: ${Math.random() * 3}s;
+    `;
+    starsEl.appendChild(s);
+  }
+
+  // Hearts
+  const heartsEl = document.getElementById('hearts');
+  const heartEmojis = ['💖','💕','💗','💓','🌸','✨','💝','🌷'];
+  function spawnHeart() {
+    const h = document.createElement('div');
+    h.className = 'heart';
+    h.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+    h.style.left = Math.random() * 100 + '%';
+    h.style.animationDuration = (Math.random() * 8 + 6) + 's';
+    h.style.animationDelay = Math.random() * 2 + 's';
+    h.style.fontSize = (Math.random() * 1.2 + 0.8) + 'rem';
+    heartsEl.appendChild(h);
+    setTimeout(() => h.remove(), 16000);
+  }
+  setInterval(spawnHeart, 700);
+
+  // Birthday countdown & stats
+  const BIRTHDAY = new Date('2026-05-03T00:00:00');
+  const BIRTH_DATE = new Date('2006-05-03T00:00:00');
+
+  function formatNum(n) {
+    if (n >= 1000000) return (n / 1000000).toFixed(1) + 'م';
+    if (n >= 1000) return (n / 1000).toFixed(1) + 'ك';
+    return n;
+  }
+
+  function updateAll() {
+    const now = new Date();
+    const diffToB = BIRTHDAY - now;
+    const isBirthday = diffToB <= 0 && diffToB > -86400000;
+
+    // Countdown or birthday message
+    if (diffToB > 0) {
+      const days = Math.floor(diffToB / 86400000);
+      const hours = Math.floor((diffToB % 86400000) / 3600000);
+      const mins = Math.floor((diffToB % 3600000) / 60000);
+      const secs = Math.floor((diffToB % 60000) / 1000);
+      document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+      document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('cd-minutes').textContent = String(mins).padStart(2, '0');
+      document.getElementById('cd-seconds').textContent = String(secs).padStart(2, '0');
+      document.getElementById('countdownTitle').textContent = '⏳ الوقت المتبقي على عيد ميلادك';
+      document.getElementById('ageDisplay').innerHTML = `ستصبحين <span>20 سنة</span> بعد ${days} يوم`;
+    } else if (isBirthday) {
+      document.getElementById('countdownTitle').textContent = '🎉 اليوم هو عيد ميلادك يا ندى!';
+      document.getElementById('cd-days').textContent = '00';
+      document.getElementById('cd-hours').textContent = '00';
+      document.getElementById('cd-minutes').textContent = '00';
+      document.getElementById('cd-seconds').textContent = '🎂';
+      document.getElementById('ageDisplay').innerHTML = `<span>Happy 20th Birthday! 🥳</span>`;
+      document.body.classList.add('birthday-mode');
+    } else {
+      // After birthday this year, show next year countdown
+      const nextBday = new Date('2027-05-03T00:00:00');
+      const diff2 = nextBday - now;
+      const days = Math.floor(diff2 / 86400000);
+      document.getElementById('countdownTitle').textContent = '🎊 عيدك المقبل بعد';
+      document.getElementById('cd-days').textContent = String(days).padStart(3, '0');
+      document.getElementById('ageDisplay').innerHTML = `عمرك الآن <span>20 سنة</span> 🎉`;
+    }
+
+    // Stats
+    const lived = now - BIRTH_DATE;
+    const yearsLived = Math.floor(lived / (365.25 * 86400000));
+    const daysLived = Math.floor(lived / 86400000);
+    const hoursLived = Math.floor(lived / 3600000);
+    const heartbeats = Math.floor(hoursLived * 4200);
+
+    document.getElementById('stat-years').textContent = yearsLived;
+    document.getElementById('stat-days').textContent = daysLived.toLocaleString('ar');
+    document.getElementById('stat-hours').textContent = hoursLived.toLocaleString('ar');
+    document.getElementById('stat-heartbeats').textContent = formatNum(heartbeats);
+  }
+
+  updateAll();
+  setInterval(updateAll, 1000);
+
+  // Gift open
+  let giftOpened = false;
+  function openGift() {
+    if (giftOpened) return;
+    giftOpened = true;
+    const lid = document.getElementById('giftLid');
+    lid.style.transform = 'rotateX(-120deg)';
+    document.getElementById('giftHint').textContent = '💌 تفتح الهدية...';
+    launchConfetti();
+    launchBalloons();
+    playSounds();
+    setTimeout(() => {
+      document.getElementById('messageOverlay').classList.add('active');
+      document.getElementById('giftHint').style.display = 'none';
+    }, 700);
+  }
+
+  function closeMessage() {
+    document.getElementById('messageOverlay').classList.remove('active');
+  }
+
+  // Confetti
+  function launchConfetti(count = 60) {
+    const colors = ['#ff6b9d','#ffd700','#c084fc','#67e8f9','#86efac','#fda4af'];
+    for (let i = 0; i < count; i++) {
+      setTimeout(() => {
+        const c = document.createElement('div');
+        c.className = 'confetti-piece';
+        c.style.cssText = `
+          left: ${Math.random() * 100}vw;
+          top: -10px;
+          width: ${Math.random() * 10 + 5}px;
+          height: ${Math.random() * 10 + 5}px;
+          background: ${colors[Math.floor(Math.random() * colors.length)]};
+          animation-duration: ${Math.random() * 2 + 2}s;
+          animation-delay: ${Math.random() * 1}s;
+          border-radius: ${Math.random() > 0.5 ? '50%' : '3px'};
+        `;
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 4000);
+      }, i * 30);
+    }
+  }
+
+  // Balloons
+  function launchBalloons(count = 20) {
+    const balloonEmojis = ['🎈','🎈','🎈','🎈','🎈','🎈','🎈','🎈','🎈','🎈','🎈','🎈','🎈','🎈','🎈','🎈','🎈','🎈','🎈','🎈'];
+    for (let i = 0; i < count; i++) {
+      setTimeout(() => {
+        const b = document.createElement('div');
+        b.className = 'balloon';
+        b.textContent = balloonEmojis[Math.floor(Math.random() * balloonEmojis.length)];
+        b.style.cssText = `
+          left: ${Math.random() * 100}vw;
+          bottom: -50px;
+          animation-duration: ${Math.random() * 3 + 4}s;
+          animation-delay: ${Math.random() * 2}s;
+          color: hsl(${Math.random() * 360}, 70%, 60%);
+        `;
+        document.body.appendChild(b);
+        setTimeout(() => b.remove(), 7000);
+      }, i * 100);
+    }
+  }
+
+  // Play sounds
+  function playSounds() {
+    const horn = document.getElementById('partyHorn');
+    const song = document.getElementById('birthdaySong');
+    horn.play().catch(e => console.log('Horn play failed:', e));
+    setTimeout(() => {
+      song.play().catch(e => console.log('Song play failed:', e));
+    }, 500);
+  }
+
+  // Cake click
+  function celebrate() {
+    const cake = document.getElementById('cakeEmoji');
+    cake.style.animation = 'none';
+    launchConfetti(80);
+    // pop emojis
+    const emojis = ['🎉','🎊','🥳','✨','💖','🌟'];
+    emojis.forEach((e, i) => {
+      setTimeout(() => {
+        const el = document.createElement('div');
+        el.textContent = e;
+        el.style.cssText = `
+          position: fixed;
+          left: ${40 + i * 8}%;
+          top: 50%;
+          font-size: 2.5rem;
+          pointer-events: none;
+          z-index: 300;
+          animation: floatUp 2s ease forwards;
+        `;
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 2000);
+      }, i * 100);
+    });
+    setTimeout(() => {
+      cake.style.animation = '';
+    }, 600);
+  }
+</script>
+</body>
+</html>
